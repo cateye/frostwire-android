@@ -143,6 +143,9 @@ public class MediaPlayerActivity extends AbstractActivity implements MediaPlayer
     @Override
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
         switch (item.getItemId()) {
+        case android.R.id.home:
+            finish();
+            return true;
         case R.id.menu_media_player_activity_share:
             if (mediaFD != null) {
                 mediaFD.shared = !mediaFD.shared;
@@ -334,7 +337,9 @@ public class MediaPlayerActivity extends AbstractActivity implements MediaPlayer
     
     @Override
     protected void initActionBar(ActionBar bar) {
+        setTitle(R.string.now_playing);
         bar.setDisplayHomeAsUpEnabled(true);
+        bar.setDisplayShowHomeEnabled(false);
     }
 
     private void refreshUIData() {
