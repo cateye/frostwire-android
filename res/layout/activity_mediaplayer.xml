@@ -2,7 +2,7 @@
 <!--
 /*
  * Created by Angel Leon (@gubatron), Alden Torres (aldenml)
- * Copyright (c) 2011-2013, FrostWire(R). All rights reserved.
+ * Copyright (c) 2011-2014, FrostWire(R). All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,45 +21,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_mediaplayer_root"
     android:layout_width="match_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="match_parent"
     android:background="@color/app_background"
     android:orientation="vertical" >
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/mediaplayer_header_background"
+        android:background="@color/app_dark_blue"
+        android:orientation="vertical"
         android:paddingBottom="4dp"
         android:paddingTop="4dp" >
-
-        <ImageButton
-            android:id="@+id/activity_mediaplayer_button_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:background="@null"
-            android:contentDescription="@null"
-            android:src="@drawable/back_icon_activity" />
-
-        <ImageButton
-            android:id="@+id/activity_mediaplayer_button_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:background="@null"
-            android:contentDescription="@null"
-            android:src="@drawable/mediaplayer_menu_icon" />
 
         <TextView
             android:id="@+id/activity_mediaplayer_artist"
             style="@style/MediaPlayerHeaderTitle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/activity_mediaplayer_button_menu"
-            android:layout_toRightOf="@id/activity_mediaplayer_button_back"
-            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
             android:text="@string/dummy_title" />
 
         <TextView
@@ -67,10 +46,7 @@
             style="@style/MediaPlayerHeaderTitleBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/activity_mediaplayer_artist"
-            android:layout_alignRight="@id/activity_mediaplayer_artist"
-            android:layout_below="@id/activity_mediaplayer_artist"
-            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
             android:text="@string/dummy_title" />
 
         <TextView
@@ -78,12 +54,9 @@
             style="@style/MediaPlayerHeaderTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/activity_mediaplayer_title"
-            android:layout_alignRight="@id/activity_mediaplayer_title"
-            android:layout_below="@id/activity_mediaplayer_title"
-            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
             android:text="@string/dummy_title" />
-    </RelativeLayout>
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -131,11 +104,11 @@
         android:id="@+id/view_media_controller_progress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/app_dark_blue_highlight"
+        android:padding="0sp"
         android:progress="10"
         android:progressDrawable="@drawable/player_seek_progress_horizontal"
-        android:thumb="@drawable/player_seekbar_thumb"
-        android:padding="0sp"
-        android:background="@color/app_dark_blue_highlight" />
+        android:thumb="@drawable/player_seekbar_thumb" />
 
     <LinearLayout
         android:layout_width="fill_parent"

@@ -84,9 +84,6 @@ public class MediaPlayerActivity extends AbstractActivity implements MediaPlayer
 
     private BroadcastReceiver broadcastReceiver;
 
-    private ImageButton buttonBack;
-    private ImageButton buttonMenu;
-
     public MediaPlayerActivity() {
         super(R.layout.activity_mediaplayer);
 
@@ -281,22 +278,6 @@ public class MediaPlayerActivity extends AbstractActivity implements MediaPlayer
         } else {
             mediaPlayer.stop();
         }
-
-        buttonBack = findView(R.id.activity_mediaplayer_button_back);
-        buttonBack.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-        buttonMenu = findView(R.id.activity_mediaplayer_button_menu);
-        buttonMenu.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPlayerContextMenu();
-            }
-        });
 
         // media playerControl controls
         buttonPrevious = (ImageButton) findViewById(R.id.activity_mediaplayer_button_previous);
