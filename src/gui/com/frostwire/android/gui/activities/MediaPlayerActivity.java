@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.Formatter;
 import java.util.Locale;
 
+import android.app.ActionBar;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -35,10 +36,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -118,6 +120,51 @@ public class MediaPlayerActivity extends AbstractActivity implements MediaPlayer
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         sync();
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.media_player_activity, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (mediaFD != null) {
+            android.view.MenuItem item = menu.findItem(R.id.menu_media_player_activity_share);
+            item.setTitle(mediaFD.shared ? R.string.unshare : R.string.share);
+            item.setIcon(mediaFD.shared ? R.drawable.contextmenu_icon_unshare : R.drawable.contextmenu_icon_share);
+        }
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.menu_media_player_activity_share:
+            if (mediaFD != null) {
+                mediaFD.shared = !mediaFD.shared;
+                Librarian.instance().updateSharedStates(mediaFD.fileType, Arrays.asList(mediaFD));
+                UXStats.instance().log(mediaFD.shared ? UXAction.PLAYER_MENU_SHARE : UXAction.PLAYER_MENU_UNSHARE);
+            }
+            return true;
+        case R.id.menu_media_player_activity_stop:
+            stop();
+            UXStats.instance().log(UXAction.PLAYER_MENU_STOP);
+            return true;
+        case R.id.menu_media_player_activity_delete:
+            UIUtils.showYesNoDialog(MediaPlayerActivity.this, R.string.are_you_sure_delete_current_track, R.string.application_label, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    onDeleteCurrentTrack();
+                    UXStats.instance().log(UXAction.PLAYER_MENU_DELETE_TRACK);
+                }
+            });
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     public void pause() {
@@ -208,12 +255,6 @@ public class MediaPlayerActivity extends AbstractActivity implements MediaPlayer
     public boolean canStop() {
         return true;
     }
-    
-    @Override
-    protected void onCreate(Bundle savedInstance) {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        super.onCreate(savedInstance);
-    }
 
     @Override
     protected void initComponents(Bundle savedInstanceState) {
@@ -289,6 +330,11 @@ public class MediaPlayerActivity extends AbstractActivity implements MediaPlayer
         if (mediaFD != null) {
             UIUtils.initSupportFrostWire(this, R.id.activity_mediaplayer_donations_view_placeholder);
         }
+    }
+    
+    @Override
+    protected void initActionBar(ActionBar bar) {
+        bar.setDisplayHomeAsUpEnabled(true);
     }
 
     private void refreshUIData() {

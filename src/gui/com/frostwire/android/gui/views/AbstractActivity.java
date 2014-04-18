@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -74,9 +75,17 @@ public abstract class AbstractActivity extends Activity {
 
         setContentView(layoutResId);
         initComponents(savedInstanceState);
+
+        ActionBar bar = getActionBar();
+        if (bar != null) {
+            initActionBar(bar);
+        }
     }
 
     protected abstract void initComponents(Bundle savedInstanceState);
+
+    protected void initActionBar(ActionBar bar) {
+    }
 
     @SuppressWarnings("unchecked")
     protected final <T extends View> T findView(int id) {
