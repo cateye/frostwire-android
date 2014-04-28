@@ -18,6 +18,7 @@
 
 package com.frostwire.android.gui2.view;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -42,9 +43,17 @@ public abstract class AbstractActivity extends Activity {
 
         setContentView(layoutResId);
         initComponents(savedInstanceState);
+
+        ActionBar bar = getActionBar();
+        if (bar != null) {
+            initActionBar(bar);
+        }
     }
 
     protected abstract void initComponents(Bundle savedInstanceState);
+
+    protected void initActionBar(ActionBar bar) {
+    }
 
     @SuppressWarnings("unchecked")
     protected final <T extends View> T findView(int id) {
