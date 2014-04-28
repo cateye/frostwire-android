@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
 /*
  * Created by Angel Leon (@gubatron), Alden Torres (aldenml)
  * Copyright (c) 2011-2014, FrostWire(R). All rights reserved.
@@ -17,9 +15,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
--->
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="Theme.FrostWire" parent="android:Theme.Holo.Light"></style>
+package com.frostwire.android.gui2.activity;
 
-</resources>
+import android.os.Bundle;
+
+import com.frostwire.android.R;
+import com.frostwire.android.gui2.view.AbstractActivity;
+
+public class MainActivity extends AbstractActivity {
+
+    public MainActivity() {
+        super(R.layout.activity_main2);
+    }
+
+    @Override
+    protected void initComponents(Bundle savedInstanceState) {
+    }
+}
