@@ -54,4 +54,9 @@ public class VuzeManager {
         // TODO Auto-generated method stub
         return null;
     }
+
+    public void pause(boolean disconnected) {
+        // TODO Auto-generated method stub
+        
+    }
 }

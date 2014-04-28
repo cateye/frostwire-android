@@ -161,4 +161,9 @@ public class VuzeDownloadManager {
         
     }
 
+    public void enqueue() {
+        // TODO Auto-generated method stub
+        
+    }
+
 }
